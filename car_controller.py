@@ -14,13 +14,15 @@ CHECK_ON_OFF_HZ = 5
 
 ### Operating variables ### 
 is_on = False
-control_input = {}
+control_input = {'turn_on':False, 'turn_off':False}
 ###########################
 
 def read_control_input():
     pass
 
 def check_on_off():
+    global is_on
+    global control_input
     inp_on = control_input['turn_on'] #.get('turn_on')
     inp_off = control_input['turn_off'] #.get('turn_off')
     if(not is_on and inp_on):
@@ -39,3 +41,7 @@ def send_motor_cmd():
 t_read = threading.Timer(1/READ_HZ, read_control_input)
 t_check = threading.Timer(1/CHECK_ON_OFF_HZ, check_on_off)
 t_cmd = threading.Timer(1/MOTOR_CMD_HZ, send_motor_cmd)
+
+t_read.start()
+t_check.start()
+t_cmd.start()
