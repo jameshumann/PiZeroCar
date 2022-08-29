@@ -142,4 +142,4 @@ print("The default speed & direction of motor is LOW & Forward.....")
 print("\n")    
 
 while(1):
-
+	pass
