@@ -16,7 +16,7 @@ enB_1 = 32    # Enable B, Board 1
 
 ### Board 2 ###
 # Motor 3
-in1_2 = 27    # Input  1, Board 2
+in1_2 = 23    # Input  1, Board 2
 in2_2 = 29    # Input  2, Board 2
 enA_2 = 33    # Enable A, Board 2
 
