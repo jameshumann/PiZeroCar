@@ -1,6 +1,12 @@
 from email.policy import default
 import threading
 from time import sleep
+import pygame
+
+# Gamepad setup
+pygame.init()
+pygame.joystick.init()
+pygame.joystick.Joystick(0).init()
 
 # Board setup
 LEFT_PWM_PIN = 15
@@ -14,11 +20,20 @@ CHECK_ON_OFF_HZ = 5
 
 ### Operating variables ### 
 is_on = False
-control_input = {'turn_on':False, 'turn_off':False}
+control_input = {'turn_on':False, 'turn_off':False, 'left_stick':0, 'right_stick':0}
 ###########################
 
 def read_control_input():
-    pass
+    global control_input
+    while(True):
+        for event in pygame.event.get():
+##            print(event)
+            if(event.type == pygame.JOYAXISMOTION and event.__dict__['axis']==1):
+                print("Axis zeromoved")
+                print(event.__dict__['value'])
+            elif(event.type == pygame.JOYAXISMOTION and event.__dict__['axis']==3):
+                print("Axis 3 moved")
+                print(event.__dict__['value'])
 
 def check_on_off():
     global is_on
