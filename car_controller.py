@@ -3,9 +3,23 @@ import threading
 from time import sleep
 import pygame
 
+# Switch input to controller
+print("Swap out keyboard for gamepad in 5 sec")
+sleep(1.00)
+print("4 sec")
+sleep(1.00)
+print("3 sec")
+sleep(1.00)
+print("2 sec")
+sleep(1.00)
+print("1 sec")
+sleep(1.00)
+
 # Gamepad setup
 pygame.init()
 pygame.joystick.init()
+print("Num joysticks connected:")
+print(pygame.joystick.get_count())
 pygame.joystick.Joystick(0).init()
 
 # Board setup
