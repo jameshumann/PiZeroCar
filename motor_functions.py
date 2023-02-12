@@ -26,55 +26,56 @@ in4_2 = 37    # Input  4, Board 2
 enB_2 = 35    # Enable B, Board 2
 ###############################
 
-GPIO.setmode(GPIO.BOARD) # Use Physical Board Numbers (To use GPIO Pin Numbers use 'BCM')
+def setup_motors():
+	GPIO.setmode(GPIO.BOARD) # Use Physical Board Numbers (To use GPIO Pin Numbers use 'BCM')
 
-### Set Pins as Outputs ###
-GPIO.setup(in1_1,GPIO.OUT)
-GPIO.setup(in2_1,GPIO.OUT)
-GPIO.setup(enA_1,GPIO.OUT)
+	### Set Pins as Outputs ###
+	GPIO.setup(in1_1,GPIO.OUT)
+	GPIO.setup(in2_1,GPIO.OUT)
+	GPIO.setup(enA_1,GPIO.OUT)
 
-GPIO.setup(in3_1,GPIO.OUT)
-GPIO.setup(in4_1,GPIO.OUT)
-GPIO.setup(enB_1,GPIO.OUT)
+	GPIO.setup(in3_1,GPIO.OUT)
+	GPIO.setup(in4_1,GPIO.OUT)
+	GPIO.setup(enB_1,GPIO.OUT)
 
-GPIO.setup(in1_2,GPIO.OUT)
-GPIO.setup(in2_2,GPIO.OUT)
-GPIO.setup(enA_2,GPIO.OUT)
+	GPIO.setup(in1_2,GPIO.OUT)
+	GPIO.setup(in2_2,GPIO.OUT)
+	GPIO.setup(enA_2,GPIO.OUT)
 
-GPIO.setup(in3_2,GPIO.OUT)
-GPIO.setup(in4_2,GPIO.OUT)
-GPIO.setup(enB_2,GPIO.OUT)
-##########################
+	GPIO.setup(in3_2,GPIO.OUT)
+	GPIO.setup(in4_2,GPIO.OUT)
+	GPIO.setup(enB_2,GPIO.OUT)
+	##########################
 
-### Set Input Pins to Low ###
-GPIO.output(in1_1,GPIO.LOW)
-GPIO.output(in2_1,GPIO.LOW)
+	### Set Input Pins to Low ###
+	GPIO.output(in1_1,GPIO.LOW)
+	GPIO.output(in2_1,GPIO.LOW)
 
-GPIO.output(in3_1,GPIO.LOW)
-GPIO.output(in4_1,GPIO.LOW)
+	GPIO.output(in3_1,GPIO.LOW)
+	GPIO.output(in4_1,GPIO.LOW)
 
-GPIO.output(in1_2,GPIO.LOW)
-GPIO.output(in2_2,GPIO.LOW)
+	GPIO.output(in1_2,GPIO.LOW)
+	GPIO.output(in2_2,GPIO.LOW)
 
-GPIO.output(in3_2,GPIO.LOW)
-GPIO.output(in4_2,GPIO.LOW)
-##########################
+	GPIO.output(in3_2,GPIO.LOW)
+	GPIO.output(in4_2,GPIO.LOW)
+	##########################
 
-### Set-up PWM ###
-# Create PWM Objects
-freq = 20 # Frequency of PWM
-pA_1=GPIO.PWM(enA_1,freq)
-pB_1=GPIO.PWM(enB_1,freq)
-pA_2=GPIO.PWM(enA_2,freq)
-pB_2=GPIO.PWM(enB_2,freq)
+	### Set-up PWM ###
+	# Create PWM Objects
+	freq = 20 # Frequency of PWM
+	pA_1=GPIO.PWM(enA_1,freq)
+	pB_1=GPIO.PWM(enB_1,freq)
+	pA_2=GPIO.PWM(enA_2,freq)
+	pB_2=GPIO.PWM(enB_2,freq)
 
-# Start PWM Generation of Specified Duty Cycle
-duty_start = 0
-pA_1.start(duty_start)
-pB_1.start(duty_start)
-pA_2.start(duty_start)
-pB_2.start(duty_start)
-########################
+	# Start PWM Generation of Specified Duty Cycle
+	duty_start = 0
+	pA_1.start(duty_start)
+	pB_1.start(duty_start)
+	pA_2.start(duty_start)
+	pB_2.start(duty_start)
+	########################
 
 ### Board 1 Direction Function ###
 def direct_board1(direction):
@@ -165,5 +166,6 @@ if(__name__=="__main__"):
 ##print("sending command to stop moving board 2...\n")
 ##set_speed_board2(0)
 
-GPIO.cleanup()  
+def gpio_cleanup():
+	GPIO.cleanup()  
 
