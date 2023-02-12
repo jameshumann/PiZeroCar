@@ -28,9 +28,9 @@ RIGHT_PWM_PIN = 22
 ON_OFF_PIN = 12
 
 # Control setup
-READ_HZ = 50
-MOTOR_CMD_HZ = 20
-CHECK_ON_OFF_HZ = 5
+READ_HZ = 10
+MOTOR_CMD_HZ = 10
+CHECK_ON_OFF_HZ = 2
 
 ### Operating variables ### 
 is_on = False
@@ -45,32 +45,41 @@ def read_control_input():
             if(event.type == pygame.JOYAXISMOTION and event.__dict__['axis']==1):
                 print("Axis zeromoved")
                 print(event.__dict__['value'])
+                control_input['left_stick'] = - event.__dict__['value']
             elif(event.type == pygame.JOYAXISMOTION and event.__dict__['axis']==3):
                 print("Axis 3 moved")
                 print(event.__dict__['value'])
+                control_input['right_stick'] = - event.__dict__['value']
+        sleep(1/READ_HZ)
 
 def check_on_off():
     global is_on
     global control_input
-    inp_on = control_input['turn_on'] #.get('turn_on')
-    inp_off = control_input['turn_off'] #.get('turn_off')
-    if(not is_on and inp_on):
-        sleep(1)
-        if(inp_on):
-            is_on = True
+    while(True):
+        inp_on = control_input['turn_on'] #.get('turn_on')
+        inp_off = control_input['turn_off'] #.get('turn_off')
+        if(not is_on and inp_on):
+            sleep(1)
+            if(inp_on):
+                is_on = True
 
-    if(is_on and inp_off):
-        sleep(1)
-        if(inp_off):
-            is_on = False
+        if(is_on and inp_off):
+            sleep(1)
+            if(inp_off):
+                is_on = False
+        sleep(1/CHECK_ON_OFF_HZ)
 
 def send_motor_cmd():
-    pass
+    #print("SEND MOTOR COMMAND LEFT = " + str(control_input['left_stick']))
+    #print("SEND MOTOR COMMAND RIGHT = " + str(control_input['right_stick']))
+    while(True):
+        print("dummy motor command")
+        sleep(1/MOTOR_CMD_HZ)
 
-t_read = threading.Timer(1/READ_HZ, read_control_input)
-t_check = threading.Timer(1/CHECK_ON_OFF_HZ, check_on_off)
-t_cmd = threading.Timer(1/MOTOR_CMD_HZ, send_motor_cmd)
+t_read = threading.Thread(group=None, target=read_control_input)
+t_check = threading.Thread(group = None, target = check_on_off)
+t_cmd = threading.Thread(group = None, target = send_motor_cmd)
 
 t_read.start()
-t_check.start()
+#t_check.start()
 t_cmd.start()
