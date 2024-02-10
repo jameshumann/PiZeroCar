@@ -2,7 +2,7 @@ from email.policy import default
 import threading
 from time import sleep
 import pygame
-import motor_functions as mot
+from motor_functions import motor
 
 # Switch input to controller
 print("Swap out keyboard for gamepad in 5 sec")
@@ -18,6 +18,7 @@ sleep(1.00)
 
 # Set up motors
 print("Initializing motors")
+mot = motor()
 mot.setup_motors()
 sleep(3)
 
@@ -50,12 +51,12 @@ def read_control_input():
         for event in pygame.event.get():
 ##            print(event)
             if(event.type == pygame.JOYAXISMOTION and event.__dict__['axis']==1):
-                print("Axis zeromoved")
-                print(event.__dict__['value'])
+##                print("Axis zeromoved")
+##                print(event.__dict__['value'])
                 control_input['left_stick'] = - event.__dict__['value']
             elif(event.type == pygame.JOYAXISMOTION and event.__dict__['axis']==3):
-                print("Axis 3 moved")
-                print(event.__dict__['value'])
+##                print("Axis 3 moved")
+##                print(event.__dict__['value'])
                 control_input['right_stick'] = - event.__dict__['value']
         sleep(1/READ_HZ)
 
