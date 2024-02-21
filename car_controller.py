@@ -90,9 +90,17 @@ def send_motor_cmd():
             mot.direct_board1(-1)
         elif(control_input['right_stick'] == 0):
             mot.direct_board1(0)
-        else:
+        elif(control_input['right_stick'] > 0):
             mot.direct_board1(1)
         mot.set_speed_board1(100*abs(control_input['right_stick']))
+        
+        if(control_input['left_stick'] < 0): #Left stick is left motor board is board 2
+            mot.direct_board2(-1)
+        elif(control_input['left_stick'] == 0):
+            mot.direct_board2(0)
+        elif(control_input['left_stick'] > 0):
+            mot.direct_board2(1)
+        mot.set_speed_board2(100*abs(control_input['left_stick']))
                            
         
         sleep(1/MOTOR_CMD_HZ)
