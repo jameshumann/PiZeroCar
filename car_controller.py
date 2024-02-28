@@ -3,6 +3,7 @@ import threading
 from time import sleep
 import pygame
 from motor_functions import motor
+from leds import headlights, indicator_light
 
 # Switch input to controller
 print("Swap out keyboard for gamepad in 5 sec")
@@ -38,15 +39,18 @@ ON_OFF_PIN = 12
 # Control setup
 READ_HZ = 10
 MOTOR_CMD_HZ = 10
-CHECK_ON_OFF_HZ = 2
+CHECK_ON_OFF_HZ = 4
+# HEADLIGHTS_HZ = 5
 
 ### Operating variables ### 
 is_on = False
 control_input = {'turn_on':False, 'turn_off':False, 'left_stick':0, 'right_stick':0}
+mode = "BOOTUP" # ON, SHUTDOWN
 ###########################
 
 def read_control_input():
     global control_input
+    global mode
     while(True):
         for event in pygame.event.get():
 ##            print(event)
@@ -58,23 +62,30 @@ def read_control_input():
 ##                print("Axis 3 moved")
 ##                print(event.__dict__['value'])
                 control_input['right_stick'] = - event.__dict__['value']
+            elif(event.type == pygame.JOYBUTTONDOWN):
+                print("button depressed")
+                print(event.__dict__['value'])
+                mode = "ON"
         sleep(1/READ_HZ)
 
 def check_on_off():
     global is_on
     global control_input
     while(True):
-        inp_on = control_input['turn_on'] #.get('turn_on')
-        inp_off = control_input['turn_off'] #.get('turn_off')
-        if(not is_on and inp_on):
-            sleep(1)
-            if(inp_on):
-                is_on = True
+        if(mode == "BOOTUP"):
+            inp_on = control_input['turn_on'] #.get('turn_on')
+            inp_off = control_input['turn_off'] #.get('turn_off')
+            if(not is_on and inp_on):
+                sleep(1)
+                if(inp_on):
+                    is_on = True
+                    mode = "ON"
 
-        if(is_on and inp_off):
-            sleep(1)
-            if(inp_off):
-                is_on = False
+            # if(is_on and inp_off):
+            #     sleep(1)
+            #     if(inp_off):
+            #         is_on = False
+        print("IN MODE ", mode)
         sleep(1/CHECK_ON_OFF_HZ)
 
 def send_motor_cmd():
