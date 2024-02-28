@@ -63,8 +63,10 @@ def read_control_input():
 ##                print(event.__dict__['value'])
                 control_input['right_stick'] = - event.__dict__['value']
             elif(event.type == pygame.JOYBUTTONDOWN):
+                # Buttons are A:0, B:1, X:3, Y:4
                 print("button depressed")
-                print(event.__dict__['value'])
+                print(event)
+                print(type(event))
                 mode = "ON"
         sleep(1/READ_HZ)
 
