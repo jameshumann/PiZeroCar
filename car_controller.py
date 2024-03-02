@@ -7,16 +7,16 @@ from motor_functions import motor
 from leds import headlights, indicator_light
 
 # Switch input to controller
-print("Swap out keyboard for gamepad in 5 sec")
-sleep(1.00)
-print("4 sec")
-sleep(1.00)
-print("3 sec")
-sleep(1.00)
-print("2 sec")
-sleep(1.00)
-print("1 sec")
-sleep(1.00)
+# print("Swap out keyboard for gamepad in 5 sec")
+# sleep(1.00)
+# print("4 sec")
+# sleep(1.00)
+# print("3 sec")
+# sleep(1.00)
+# print("2 sec")
+# sleep(1.00)
+# print("1 sec")
+# sleep(1.00)
 
 # Set up motors
 print("Initializing motors")
@@ -46,7 +46,7 @@ CHECK_ON_OFF_HZ = 4
 ### Operating variables ### 
 is_on = False
 control_input = {'turn_on':False, 'turn_off':False, 'left_stick':0, 'right_stick':0}
-mode = "BOOTUP" # ON, SHUTDOWN
+mode = "BOOTUP" # ON, SHUTDOWN, OFF
 ###########################
 
 def read_control_input():
@@ -112,7 +112,7 @@ def indicate():
         sleep(0.5)
     while(mode == "SHUTDOWN"):
         indi.flash_num(10, 0.1)
-        sleep(0.5)
+        sleep(0.1)
     
 
 
@@ -130,4 +130,6 @@ t_read.join()
 t_cmd.join()
 
 sleep(1.5)
+mode = "OFF"
+sleep(0.5)
 subprocess.run(["shutdown", "-h", "now"])
