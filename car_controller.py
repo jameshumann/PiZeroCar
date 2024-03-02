@@ -67,9 +67,6 @@ def read_control_input():
                 control_input['right_stick'] = - event.__dict__['value']
             elif(event.type == pygame.JOYBUTTONDOWN):
                 # Buttons are A:0, B:1, X:3, Y:4
-                # print("button depressed")
-                # print(event)
-                # print(type(event))
                 if(event.button == 0):
                     if(mode == "BOOTUP"):
                         mode = "ON"
@@ -77,21 +74,15 @@ def read_control_input():
                         mode = "SHUTDOWN"
                 elif(event.button == 3):
                     hl.toggle()
-        print("MODE is ", mode)
+        # print("MODE is ", mode)
         sleep(1/READ_HZ)
 
 def send_motor_cmd():
     global control_input
-##    print("SEND MOTOR COMMAND LEFT = " + str(control_input['left_stick']))
-##    print("SEND MOTOR COMMAND RIGHT = " + str(control_input['right_stick']))
     while(mode == "BOOTUP"):
         sleep(0.1)
 
     while(mode == "ON"):
-##        print("dummy motor command")
-##        print("Commands R/L: " + str(control_input['right_stick']) + " " + str(conrol_input['left_stick']))
-##        print("SEND MOTOR COMMAND LEFT = " + str(control_input['left_stick']))
-##        print("SEND MOTOR COMMAND RIGHT = " + str(control_input['right_stick']))
         if(control_input['right_stick'] < 0): #Right stick is right motor board is board 1
             mot.direct_board1(-1)
         elif(control_input['right_stick'] == 0):
@@ -137,4 +128,5 @@ t_ind.start()
 t_read.join()
 t_cmd.join()
 
+sleep(1.5)
 subprocess.run(["shutdown", "-h", "now"])

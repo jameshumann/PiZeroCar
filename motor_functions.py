@@ -124,7 +124,7 @@ class motor:
         duty = max(0, duty)   # Ensure duty is >= 0
         self.pA_1.ChangeDutyCycle(duty)
         self.pB_1.ChangeDutyCycle(duty)
-        print("setting motor1 duty: ", duty)
+        # print("setting motor1 duty: ", duty)
         #print(duty)
         return
 #######################
