@@ -52,7 +52,7 @@ mode = "BOOTUP" # ON, SHUTDOWN
 def read_control_input():
     global control_input
     global mode
-    headlights = headlights()
+    hl = headlights()
 
     while(mode == "BOOTUP" or mode == "ON"):
         for event in pygame.event.get():
@@ -76,7 +76,7 @@ def read_control_input():
                     elif(mode == "ON"):
                         mode = "SHUTDOWN"
                 elif(event.button == 3):
-                    headlights.toggle()
+                    hl.toggle()
         print("MODE is ", mode)
         sleep(1/READ_HZ)
 
