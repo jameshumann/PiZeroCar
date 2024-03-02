@@ -109,7 +109,8 @@ def indicate():
         sleep(0.5)
     while(mode == "ON"):
         indi.stay_on()
-    while(mode == "OFF"):
+        sleep(0.5)
+    while(mode == "SHUTDOWN"):
         indi.flash_num(10, 0.1)
         sleep(0.5)
     
