@@ -1,4 +1,5 @@
 from email.policy import default
+import subprocess
 import threading
 from time import sleep
 import pygame
@@ -51,7 +52,9 @@ mode = "BOOTUP" # ON, SHUTDOWN
 def read_control_input():
     global control_input
     global mode
-    while(True):
+    headlights = headlights()
+
+    while(mode == "BOOTUP" or mode == "ON"):
         for event in pygame.event.get():
 ##            print(event)
             if(event.type == pygame.JOYAXISMOTION and event.__dict__['axis']==1):
@@ -64,37 +67,27 @@ def read_control_input():
                 control_input['right_stick'] = - event.__dict__['value']
             elif(event.type == pygame.JOYBUTTONDOWN):
                 # Buttons are A:0, B:1, X:3, Y:4
-                print("button depressed")
-                print(event)
-                print(type(event))
-                mode = "ON"
+                # print("button depressed")
+                # print(event)
+                # print(type(event))
+                if(event.button == 0):
+                    if(mode == "BOOTUP"):
+                        mode = "ON"
+                    elif(mode == "ON"):
+                        mode = "SHUTDOWN"
+                elif(event.button == 3):
+                    headlights.toggle()
+        print("MODE is ", mode)
         sleep(1/READ_HZ)
-
-def check_on_off():
-    global is_on
-    global control_input
-    while(True):
-        if(mode == "BOOTUP"):
-            inp_on = control_input['turn_on'] #.get('turn_on')
-            inp_off = control_input['turn_off'] #.get('turn_off')
-            if(not is_on and inp_on):
-                sleep(1)
-                if(inp_on):
-                    is_on = True
-                    mode = "ON"
-
-            # if(is_on and inp_off):
-            #     sleep(1)
-            #     if(inp_off):
-            #         is_on = False
-        print("IN MODE ", mode)
-        sleep(1/CHECK_ON_OFF_HZ)
 
 def send_motor_cmd():
     global control_input
 ##    print("SEND MOTOR COMMAND LEFT = " + str(control_input['left_stick']))
 ##    print("SEND MOTOR COMMAND RIGHT = " + str(control_input['right_stick']))
-    while(True):
+    while(mode == "BOOTUP"):
+        sleep(0.1)
+
+    while(mode == "ON"):
 ##        print("dummy motor command")
 ##        print("Commands R/L: " + str(control_input['right_stick']) + " " + str(conrol_input['left_stick']))
 ##        print("SEND MOTOR COMMAND LEFT = " + str(control_input['left_stick']))
@@ -118,10 +111,30 @@ def send_motor_cmd():
         
         sleep(1/MOTOR_CMD_HZ)
 
+def indicate():
+    indi = indicator_light()
+    while(mode == "BOOTUP"):
+        indi.flash_num(3,0.25)
+        sleep(0.5)
+    while(mode == "ON"):
+        indi.stay_on()
+    while(mode == "OFF"):
+        indi.flash_num(10, 0.1)
+        sleep(0.5)
+    
+
+
 t_read = threading.Thread(group=None, target=read_control_input)
 ##t_check = threading.Thread(group = None, target = check_on_off)
 t_cmd = threading.Thread(group = None, target = send_motor_cmd)
+t_ind = threading.Thread(group = None, target = indicate)
 
 t_read.start()
 #t_check.start()
 t_cmd.start()
+t_ind.start()
+
+t_read.join()
+t_cmd.join()
+
+subprocess.run(["shutdown", "-h", "now"])
