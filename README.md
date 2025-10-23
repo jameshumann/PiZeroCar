@@ -8,4 +8,4 @@ The 3D printer files will be available on Thingiverse and in the ```hardware``` 
 
 ## Example
 Here is the final product, with a driver and passenger:
-![Picture of final built car.](images\still_with_headlights_bears.jpg)
+![Picture of final built car.](images/still_with_headlights_bears.jpg)
