@@ -1,9 +1,10 @@
 Part,Description,Quantity,Units,Part No.,Vendor,Vendor Part No.,Link,Note
-Battery holder,Holds 8 AA batteries,1,,744790367072.00,Amazon.com,B07WY48TFC,https://www.amazon.com/dp/B07WY48TFC?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1,Sold as two-pack
+Battery holder,Holds 8 AA batteries,1,,7.4479E+11,Amazon.com,B07WY48TFC,https://www.amazon.com/dp/B07WY48TFC?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1,Sold as two-pack
 Velcro straps,"150 mm velcro straps, 12 mm width",6,,,Amazon.com,B0BJZN26QS,https://www.amazon.com/dp/B0BJZN26QS?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_4,Sold as 120-pack
-Jumper wires,24 gauge thickness minimum,36,in,,,,,					
-Power wires,14 gauge thickness minimum,18,in,,,,,				
-Headlights,"yellow LEDs, 2 mm diameter",2,,,,,,						
-Indicator light,"green LED, 5 mm diameter",1,,,,,,						
-Wheel and motor set,"2 wheels, 2 motors, 1 controller board",2,,,,,,
-Gamepad,"Gamepad with 2 analog joysticks and 2 buttons",1,,"PXN 2.4G Wireless Game Controller, P3 PC Wireless Controller,Amazon.com,B0B56XWBWL,https://www.amazon.com/dp/B0B56XWBWL?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2,						
+Jumper wires,24 gauge thickness minimum,36,in,,,,,"					"
+Power wires,14 gauge thickness minimum,18,in,,,,,"				"
+Headlights,"yellow LEDs, 2 mm diameter",2,,,,,,"						"
+Indicator light,"green LED, 5 mm diameter",1,,,,,,"						"
+Wheel and motor set,"2 wheels, 2 motors, 1 controller board",2,,,,,https://www.amazon.com/DIANN-Gearbox-Motor-200RPM-Wheel/dp/B0BR7S1DQZ/ref=sr_1_14?dib=eyJ2IjoiMSJ9.kFEgvOPmcog-7QSzPijmeyuhe1c7NXrMj6ZQ5scyyXXl2aJEZWCXxLQnb8UNAj0EY3noE2FPgxGQ5zRGre7tdfW2gQdLjOEXAJW07NMz8lMKxhqgXl-HgOAOTS5sXxHaJo8ev2J1GppdSpbuDv-9elR8NkDReXMDJw6R_uNeeIneV_d3ddo3H7DT3XMVyPYr6zEiVUGZbdxHZ4dJphdPc4REMk7O3VPpanmoIUpncA2i0jxxTU5V9LQ4SbmDcVOVTDtnAk_srqActVB2NT6PFpyvf0yliUDem8rqoy3xQdM.TM9NnIyaWzTnzf-9v-lsJe4K6NKGhfdYic0CnzPab5Y&dib_tag=se&keywords=wheel%2Band%2Bmotor%2Byellow&qid=1767123686&sr=8-14&th=1,"This is similar, but not exactly what we used"
+Gamepad,Gamepad with 2 analog joysticks and 2 buttons,1,,"PXN 2.4G Wireless Game Controller, P3 PC Wireless Controller,Amazon.com,B0B56XWBWL,https://www.amazon.com/dp/B0B56XWBWL?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_2,						
+",,,,
